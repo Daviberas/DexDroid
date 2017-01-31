@@ -13,13 +13,18 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import es.iesnervion.dbenitez.dexdroid.Fragments.HabilidadClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoHabilidadesFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoMovimientosFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoPokemonFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoTiposFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.MovimientoClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.Fragments.PokemonClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.TipoClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,18 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera)
+        switch (id)
         {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery)
-        {
-
-        } else if (id == R.id.nav_slideshow)
-        {
-
-        } else if (id == R.id.nav_manage)
-        {
-
+            case R.id.nav_pokemon:
+                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoPokemonFragment()).commit();
+                break;
+            case R.id.nav_tipos:
+                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoTiposFragment()).commit();
+                break;
+            case R.id.nav_habilidades:
+                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoHabilidadesFragment()).commit();
+                break;
+            case R.id.nav_movimientos:
+                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoMovimientosFragment()).commit();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,6 +105,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPokemonClicked(PokemonClickedEvent event)
+    {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTipoClicked(TipoClickedEvent event)
+    {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHabilidadClicked(HabilidadClickedEvent event)
+    {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMovimientoClicked(MovimientoClickedEvent event)
     {
 
     }
