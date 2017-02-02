@@ -10,4 +10,9 @@ public class PokemonClickedEvent
     {
         this.pokemon = pokemon;
     }
+
+    public Pokemon getPokemon()
+    {
+        return pokemon;
+    }
 }

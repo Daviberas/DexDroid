@@ -1,5 +1,6 @@
 package es.iesnervion.dbenitez.dexdroid.Activities;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import es.iesnervion.dbenitez.dexdroid.Fragments.DetallePokemonFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.HabilidadClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoHabilidadesFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoMovimientosFragment;
@@ -70,16 +72,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.nav_pokemon:
-                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoPokemonFragment()).commit();
+                ListadoPokemonFragment fragmentPokes = new ListadoPokemonFragment();
+                FragmentTransaction transactionPokes = getFragmentManager().beginTransaction();
+
+                transactionPokes.replace(R.id.content_main,fragmentPokes);
+                transactionPokes.addToBackStack(null);
+
+                transactionPokes.commit();
                 break;
             case R.id.nav_tipos:
-                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoTiposFragment()).commit();
+                ListadoTiposFragment fragmentTipos = new ListadoTiposFragment();
+                FragmentTransaction transactionTipos = getFragmentManager().beginTransaction();
+
+                transactionTipos.replace(R.id.content_main,fragmentTipos);
+                transactionTipos.addToBackStack(null);
+
+                transactionTipos.commit();
                 break;
             case R.id.nav_habilidades:
-                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoHabilidadesFragment()).commit();
+                ListadoHabilidadesFragment fragmentHabilidades = new ListadoHabilidadesFragment();
+                FragmentTransaction transactionHabilidades = getFragmentManager().beginTransaction();
+
+                transactionHabilidades.replace(R.id.content_main,fragmentHabilidades);
+                transactionHabilidades.addToBackStack(null);
+
+                transactionHabilidades.commit();
                 break;
             case R.id.nav_movimientos:
-                getFragmentManager().beginTransaction().replace(R.id.content_main,new ListadoMovimientosFragment()).commit();
+                ListadoMovimientosFragment fragmentMovimientos = new ListadoMovimientosFragment();
+                FragmentTransaction transactionMovimientos = getFragmentManager().beginTransaction();
+
+                transactionMovimientos.replace(R.id.content_main,fragmentMovimientos);
+                transactionMovimientos.addToBackStack(null);
+
+                transactionMovimientos.commit();
                 break;
         }
 
@@ -106,7 +132,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPokemonClicked(PokemonClickedEvent event)
     {
+        DetallePokemonFragment fragment = new DetallePokemonFragment();
+        Bundle args = new Bundle();
+        args.putInt(DetallePokemonFragment.ARG_ID, event.getPokemon().getNumPokedex());
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        transaction.replace(R.id.content_main,fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

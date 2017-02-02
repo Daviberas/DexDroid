@@ -10,4 +10,9 @@ public class HabilidadClickedEvent
     {
         this.habilidad = habilidad;
     }
+
+    public Habilidad getHabilidad()
+    {
+        return habilidad;
+    }
 }

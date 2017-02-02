@@ -10,4 +10,9 @@ public class MovimientoClickedEvent
     {
         this.movimiento = movimiento;
     }
+
+    public Movimiento getMovimiento()
+    {
+        return movimiento;
+    }
 }

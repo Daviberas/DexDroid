@@ -10,4 +10,8 @@ public class TipoClickedEvent
     {
         this.tipo = tipo;
     }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
 }
