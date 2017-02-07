@@ -1,6 +1,5 @@
 package es.iesnervion.dbenitez.dexdroid.Fragments;
 
-import android.app.Fragment;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -11,17 +10,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 public class PokemonCallback implements Callback<List<Pokemon>>
 {
     List<Pokemon> pokes;
-    DetallePokemon detallePokemon;
+    DetallePokemonFragment detallePokemon;
     ListadoPokemonFragment listadoPokemonFragment;
 
-    public PokemonCallback(DetallePokemon detallePokemon)
+    public PokemonCallback(DetallePokemonFragment detallePokemonFragment)
     {
-        this.detallePokemon = detallePokemon;
+        this.detallePokemon = detallePokemonFragment;
     }
 
     public PokemonCallback(ListadoPokemonFragment listadoPokemonFragment)
@@ -47,12 +44,12 @@ public class PokemonCallback implements Callback<List<Pokemon>>
 
         if(detallePokemon != null)
         {
-            detallePokemon.pokemonResponsed(pokes);
+            detallePokemon.pokemonResponse(pokes);
         }
         else
             if(listadoPokemonFragment != null)
             {
-                listadoPokemonFragment.pokemonResponsed(pokes);
+                listadoPokemonFragment.pokemonResponse(pokes);
             }
     }
 

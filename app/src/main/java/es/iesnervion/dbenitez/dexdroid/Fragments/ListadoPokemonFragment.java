@@ -15,14 +15,17 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Tipo;
+import es.iesnervion.dbenitez.dexdroid.Models.TiposPokemon;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.PokemonInterface;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListadoPokemonFragment extends ListFragment implements ApiResponseDetallePokemon
+public class ListadoPokemonFragment extends ListFragment implements ApiResponse
 {
     PokemonCallback pokemonCallback;
+    Pokemon[] arrayPokemon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -52,10 +55,22 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponseD
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void pokemonResponsed(List<Pokemon> pokes)
+    public void pokemonResponse(List<Pokemon> pokes)
     {
-        Pokemon[] arrayPokemon=new Pokemon[pokes.size()];
+        arrayPokemon=new Pokemon[pokes.size()];
         setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
+    }
+
+    @Override
+    public void tiposPokemonResponse(List<TiposPokemon> tiposPoke)
+    {
+
+    }
+
+    @Override
+    public void tipoResponse(List<Tipo> tipos)
+    {
+
     }
 
     class AdapterIcono<T> extends ArrayAdapter<T>
@@ -85,7 +100,7 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponseD
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getTv().setText(pokemonCallback.getPokes().get(position).getNombre());
+            holder.getTv().setText(arrayPokemon[position].getNombre());
 
             return (row);
         }

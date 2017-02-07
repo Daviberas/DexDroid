@@ -1,25 +1,25 @@
 package es.iesnervion.dbenitez.dexdroid.Fragments;
 
 import android.app.Fragment;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Tipo;
+import es.iesnervion.dbenitez.dexdroid.Models.TiposPokemon;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.PokemonInterface;
+import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.TipoInterface;
+import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.TiposPokemonInterface;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetallePokemon extends Fragment implements ApiResponseDetallePokemon
+public class DetallePokemonFragment extends Fragment implements ApiResponse
 {
     public final static String ARG_ID = "id";
     int mCurrentPosition = -1;
@@ -35,7 +35,7 @@ public class DetallePokemon extends Fragment implements ApiResponseDetallePokemo
             PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
             PokemonCallback pokemonCallback = new PokemonCallback(this);
-            pi.getPokemon().enqueue(pokemonCallback);
+            pi.getPokemon(mCurrentPosition).enqueue(pokemonCallback);
         }
 
         return inflater.inflate(R.layout.detalle_pokemon, container, false);
@@ -62,12 +62,12 @@ public class DetallePokemon extends Fragment implements ApiResponseDetallePokemo
         PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
         PokemonCallback pokemonCallback = new PokemonCallback(this);
-        pi.getPokemon().enqueue(pokemonCallback);
+        pi.getPokemon(position).enqueue(pokemonCallback);
 
         mCurrentPosition = position;
     }
 
-    public void pokemonResponsed(List<Pokemon> pokes)
+    public void pokemonResponse(List<Pokemon> pokes)
     {
         if (pokes != null)
         {
@@ -85,6 +85,43 @@ public class DetallePokemon extends Fragment implements ApiResponseDetallePokemo
             TextView porcentajeMacho = (TextView) getActivity().findViewById(R.id.porcentajeMachoPokemon);
             porcentajeMacho.setText("" + poke.getPorcentajeMacho());
 
+            Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
+            TiposPokemonInterface tpi= retrofit.create(TiposPokemonInterface.class);
+
+            TiposPokemonCallback tiposPokemonCallback = new TiposPokemonCallback(this);
+            tpi.getTiposPokemon(poke.getNumPokedex()).enqueue(tiposPokemonCallback);
+        }
+    }
+
+    @Override
+    public void tiposPokemonResponse(List<TiposPokemon> tiposPoke)
+    {
+        if (tiposPoke != null)
+        {
+            for(int i = 0; i<tiposPoke.size();i++)
+            {
+                Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
+                TipoInterface ti= retrofit.create(TipoInterface.class);
+
+                TipoCallback tipoCallback = new TipoCallback(this);
+                ti.getTipo(tiposPoke.get(i).getIdTipo()).enqueue(tipoCallback);
+            }
+        }
+    }
+
+    @Override
+    public void tipoResponse(List<Tipo> tipos)
+    {
+        if (tipos != null)
+        {
+            Tipo tipo = tipos.get(0);
+
+            TextView txtTipo = (TextView) getActivity().findViewById(R.id.txtTipoPokemon);
+            String txtPrevio = (String) txtTipo.getText();
+            if(txtPrevio == "")
+                txtTipo.setText(tipo.getNombre());
+            else
+                txtTipo.setText(txtPrevio+" / "+tipo.getNombre());
         }
     }
 
