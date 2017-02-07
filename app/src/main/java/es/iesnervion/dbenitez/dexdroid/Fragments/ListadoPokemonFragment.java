@@ -5,29 +5,24 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.PokemonInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListadoPokemonFragment extends ListFragment implements Callback<List<Pokemon>>
+public class ListadoPokemonFragment extends ListFragment implements ApiResponseDetallePokemon
 {
-    private List<Pokemon> pokes;
+    PokemonCallback pokemonCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -39,7 +34,8 @@ public class ListadoPokemonFragment extends ListFragment implements Callback<Lis
         Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
         PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
-        pi.getPokemon().enqueue(this);
+        pokemonCallback = new PokemonCallback(this);
+        pi.getPokemon().enqueue(pokemonCallback);
 
         return(result);
     }
@@ -52,20 +48,14 @@ public class ListadoPokemonFragment extends ListFragment implements Callback<Lis
         EventBus.getDefault().post(new PokemonClickedEvent(poke));
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response)
+    public void pokemonResponsed(List<Pokemon> pokes)
     {
-        pokes = response.body();
         Pokemon[] arrayPokemon=new Pokemon[pokes.size()];
-        setListAdapter(new AdapterIcono<Pokemon>(this.getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
-    }
-
-    @Override
-    public void onFailure(Call<List<Pokemon>> call, Throwable t)
-    {
-        Toast.makeText(getActivity(), t.getMessage(),Toast.LENGTH_SHORT).show();
-        Log.e(getClass().getSimpleName(),"Exception from Retrofit request to StackOverflow", t);
+        setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
     }
 
     class AdapterIcono<T> extends ArrayAdapter<T>
@@ -95,7 +85,7 @@ public class ListadoPokemonFragment extends ListFragment implements Callback<Lis
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getTv().setText(pokes.get(position).getNombre());
+            holder.getTv().setText(pokemonCallback.getPokes().get(position).getNombre());
 
             return (row);
         }

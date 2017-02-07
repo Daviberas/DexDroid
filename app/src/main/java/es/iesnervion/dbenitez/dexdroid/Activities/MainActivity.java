@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import es.iesnervion.dbenitez.dexdroid.Fragments.DetallePokemonFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.DetallePokemon;
 import es.iesnervion.dbenitez.dexdroid.Fragments.HabilidadClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoHabilidadesFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoMovimientosFragment;
@@ -132,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPokemonClicked(PokemonClickedEvent event)
     {
-        DetallePokemonFragment fragment = new DetallePokemonFragment();
+        DetallePokemon fragment = new DetallePokemon();
         Bundle args = new Bundle();
-        args.putInt(DetallePokemonFragment.ARG_ID, event.getPokemon().getNumPokedex());
+        args.putInt(DetallePokemon.ARG_ID, event.getPokemon().getNumPokedex());
         fragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 

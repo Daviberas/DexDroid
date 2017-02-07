@@ -14,16 +14,12 @@ import android.widget.Toast;
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
-import es.iesnervion.dbenitez.dexdroid.Models.PokemonResponse;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.PokemonInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetallePokemonFragment extends Fragment implements Callback<List<Pokemon>>,PokemonResponse
+public class DetallePokemon extends Fragment implements ApiResponseDetallePokemon
 {
     public final static String ARG_ID = "id";
     int mCurrentPosition = -1;
@@ -38,7 +34,8 @@ public class DetallePokemonFragment extends Fragment implements Callback<List<Po
             Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
             PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
-            pi.getPokemon(mCurrentPosition).enqueue(this);
+            PokemonCallback pokemonCallback = new PokemonCallback(this);
+            pi.getPokemon().enqueue(pokemonCallback);
         }
 
         return inflater.inflate(R.layout.detalle_pokemon, container, false);
@@ -64,15 +61,17 @@ public class DetallePokemonFragment extends Fragment implements Callback<List<Po
         Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
         PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
-        pi.getPokemon(position).enqueue(this);
+        PokemonCallback pokemonCallback = new PokemonCallback(this);
+        pi.getPokemon().enqueue(pokemonCallback);
 
         mCurrentPosition = position;
     }
 
-    public void pokemonResponsed(Pokemon poke)
+    public void pokemonResponsed(List<Pokemon> pokes)
     {
-        if (poke != null)
+        if (pokes != null)
         {
+            Pokemon poke = pokes.get(0);
 
             TextView num = (TextView) getActivity().findViewById(R.id.numPokemon);
             num.setText(""+poke.getNumPokedex());
@@ -94,19 +93,5 @@ public class DetallePokemonFragment extends Fragment implements Callback<List<Po
         super.onSaveInstanceState(outState);
 
         outState.putInt(ARG_ID, mCurrentPosition);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response)
-    {
-        pokemonResponsed(response.body().get(0));
-    }
-
-    @Override
-    public void onFailure(Call<List<Pokemon>> call, Throwable t)
-    {
-        Toast.makeText(getActivity(), t.getMessage(),Toast.LENGTH_SHORT).show();
-        Log.e(getClass().getSimpleName(),"Exception from Retrofit request to StackOverflow", t);
     }
 }
