@@ -14,10 +14,22 @@ public class MovimientoCallback implements Callback<List<Movimiento>>
 {
     List<Movimiento> movimientos;
     DetallePokemonFragment detallePokemon;
+    DetalleMovimientoFragment detalleMovimiento;
+    ListadoMovimientosFragment listadoMovimientos;
 
     public MovimientoCallback(DetallePokemonFragment detallePokemonFragment)
     {
         this.detallePokemon = detallePokemonFragment;
+    }
+
+    public MovimientoCallback(DetalleMovimientoFragment detalleMovimiento)
+    {
+        this.detalleMovimiento = detalleMovimiento;
+    }
+
+    public MovimientoCallback(ListadoMovimientosFragment listadoMovimientos)
+    {
+        this.listadoMovimientos = listadoMovimientos;
     }
 
     public List<Movimiento> getMovimientos()
@@ -36,7 +48,14 @@ public class MovimientoCallback implements Callback<List<Movimiento>>
     {
         movimientos = response.body();
 
-        detallePokemon.movimientoResponse(movimientos);
+        if(detallePokemon!=null)
+            detallePokemon.movimientoResponse(movimientos);
+        else
+            if(listadoMovimientos!=null)
+                listadoMovimientos.movimientoResponse(movimientos);
+            else
+                if(detalleMovimiento!=null)
+                    detalleMovimiento.movimientoResponse(movimientos);
     }
 
     @Override

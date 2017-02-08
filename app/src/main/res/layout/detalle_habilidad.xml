@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="Pokémon con esta habilidad:"/>
     <GridView
-        android:id="@+id/gridPokemonTipo"
+        android:id="@+id/gridPokemonHabilidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></GridView>
 </LinearLayout>

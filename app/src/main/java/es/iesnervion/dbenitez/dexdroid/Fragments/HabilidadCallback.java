@@ -15,10 +15,24 @@ public class HabilidadCallback implements Callback<List<Habilidad>>
     List<Habilidad> habilidades;
     String categoria;
     DetallePokemonFragment detallePokemon;
+    DetalleHabilidadFragment detalleHabilidad;
+    ListadoHabilidadesFragment listadoHabilidad;
 
     public HabilidadCallback(DetallePokemonFragment detallePokemonFragment, String categoria)
     {
         this.detallePokemon = detallePokemonFragment;
+        this.categoria = categoria;
+    }
+
+    public HabilidadCallback(DetalleHabilidadFragment detalleHabilidad, String categoria)
+    {
+        this.detalleHabilidad = detalleHabilidad;
+        this.categoria = categoria;
+    }
+
+    public HabilidadCallback(ListadoHabilidadesFragment listadoHabilidad, String categoria)
+    {
+        this.listadoHabilidad = listadoHabilidad;
         this.categoria = categoria;
     }
 
@@ -38,7 +52,14 @@ public class HabilidadCallback implements Callback<List<Habilidad>>
     {
         habilidades = response.body();
 
-        detallePokemon.habilidadResponse(habilidades, categoria);
+        if(detallePokemon!=null)
+            detallePokemon.habilidadResponse(habilidades, categoria);
+        else
+            if(listadoHabilidad!=null)
+                listadoHabilidad.habilidadResponse(habilidades,categoria);
+            else
+                if(detalleHabilidad!=null)
+                    detalleHabilidad.habilidadResponse(habilidades,categoria);
     }
 
     @Override

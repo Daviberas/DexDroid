@@ -14,7 +14,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleHabilidadFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleMovimientoFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.DetallePokemonFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleTipoFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.HabilidadClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoHabilidadesFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoMovimientosFragment;
@@ -147,18 +150,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTipoClicked(TipoClickedEvent event)
     {
+        DetalleTipoFragment fragment = new DetalleTipoFragment();
+        Bundle args = new Bundle();
+        args.putInt(DetalleTipoFragment.ARG_ID, event.getTipo().getId());
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        transaction.replace(R.id.content_main,fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onHabilidadClicked(HabilidadClickedEvent event)
     {
+        DetalleHabilidadFragment fragment = new DetalleHabilidadFragment();
+        Bundle args = new Bundle();
+        args.putInt(DetalleHabilidadFragment.ARG_ID, event.getHabilidad().getId());
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        transaction.replace(R.id.content_main,fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMovimientoClicked(MovimientoClickedEvent event)
     {
+        DetalleMovimientoFragment fragment = new DetalleMovimientoFragment();
+        Bundle args = new Bundle();
+        args.putInt(DetalleMovimientoFragment.ARG_ID, event.getMovimiento().getId());
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        transaction.replace(R.id.content_main,fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 }

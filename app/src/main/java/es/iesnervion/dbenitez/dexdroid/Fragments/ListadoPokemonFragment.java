@@ -29,7 +29,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListadoPokemonFragment extends ListFragment implements ApiResponse
 {
-    PokemonCallback pokemonCallback;
     Pokemon[] arrayPokemon;
 
     @Override
@@ -42,7 +41,7 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
         Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
         PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
-        pokemonCallback = new PokemonCallback(this);
+        PokemonCallback pokemonCallback = new PokemonCallback(this);
         pi.getPokemon().enqueue(pokemonCallback);
 
         return(result);

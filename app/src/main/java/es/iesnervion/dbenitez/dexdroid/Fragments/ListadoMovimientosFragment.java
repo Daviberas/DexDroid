@@ -18,7 +18,14 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import es.iesnervion.dbenitez.dexdroid.Models.Evolucion;
+import es.iesnervion.dbenitez.dexdroid.Models.Habilidad;
+import es.iesnervion.dbenitez.dexdroid.Models.HabilidadesPokemon;
 import es.iesnervion.dbenitez.dexdroid.Models.Movimiento;
+import es.iesnervion.dbenitez.dexdroid.Models.MovimientosPokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Tipo;
+import es.iesnervion.dbenitez.dexdroid.Models.TiposPokemon;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.MovimientoInterface;
 import retrofit2.Call;
@@ -27,9 +34,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListadoMovimientosFragment extends ListFragment implements Callback<List<Movimiento>>
+public class ListadoMovimientosFragment extends ListFragment implements ApiResponse
 {
-    private List<Movimiento> movimientos;
+    Movimiento[] arrayMovimientos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,7 +48,8 @@ public class ListadoMovimientosFragment extends ListFragment implements Callback
         Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
         MovimientoInterface ti= retrofit.create(MovimientoInterface.class);
 
-        ti.getMovimiento().enqueue(this);
+        MovimientoCallback movimientoCallback = new MovimientoCallback(this);
+        ti.getMovimiento().enqueue(movimientoCallback);
 
         return(result);
     }
@@ -54,20 +62,47 @@ public class ListadoMovimientosFragment extends ListFragment implements Callback
         EventBus.getDefault().post(new MovimientoClickedEvent(Movimiento));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onResponse(Call<List<Movimiento>> call, Response<List<Movimiento>> response)
-    {
-        movimientos = response.body();
-        Movimiento[] arraymovimientos =new Movimiento[movimientos.size()];
-        setListAdapter(new ListadoMovimientosFragment.AdapterIcono<Movimiento>(this.getContext(), R.layout.row, R.id.texto,movimientos.toArray(arraymovimientos)));
+    public void pokemonResponse(List<Pokemon> poke, boolean evolucion) {
+
     }
 
     @Override
-    public void onFailure(Call<List<Movimiento>> call, Throwable t)
+    public void tiposPokemonResponse(List<TiposPokemon> tiposPoke) {
+
+    }
+
+    @Override
+    public void tipoResponse(List<Tipo> tipos) {
+
+    }
+
+    @Override
+    public void habilidadesPokemonResponse(List<HabilidadesPokemon> habilidadesPoke) {
+
+    }
+
+    @Override
+    public void habilidadResponse(List<Habilidad> habilidades, String categoria) {
+
+    }
+
+    @Override
+    public void evolucionResponse(List<Evolucion> evoluciones) {
+
+    }
+
+    @Override
+    public void movimientosPokemonResponse(List<MovimientosPokemon> movimientosPokemon) {
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void movimientoResponse(List<Movimiento> movimientos)
     {
-        Toast.makeText(getActivity(), t.getMessage(),Toast.LENGTH_SHORT).show();
-        Log.e(getClass().getSimpleName(),"Exception from Retrofit request to StackOverflow", t);
+        arrayMovimientos =new Movimiento[movimientos.size()];
+        setListAdapter(new ListadoMovimientosFragment.AdapterIcono<Movimiento>(this.getContext(), R.layout.row, R.id.texto,movimientos.toArray(arrayMovimientos)));
     }
 
     class AdapterIcono<T> extends ArrayAdapter<T>
@@ -97,7 +132,7 @@ public class ListadoMovimientosFragment extends ListFragment implements Callback
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getTv().setText(movimientos.get(position).getNombre());
+            holder.getTv().setText(arrayMovimientos[position].getNombre());
 
             return (row);
         }

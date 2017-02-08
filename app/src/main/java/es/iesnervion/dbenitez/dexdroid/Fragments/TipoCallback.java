@@ -14,10 +14,22 @@ public class TipoCallback implements Callback<List<Tipo>>
 {
     List<Tipo> tipos;
     DetallePokemonFragment detallePokemon;
+    DetalleTipoFragment detalleTipo;
+    ListadoTiposFragment listadoTipos;
 
     public TipoCallback(DetallePokemonFragment detallePokemonFragment)
     {
         this.detallePokemon = detallePokemonFragment;
+    }
+
+    public TipoCallback(DetalleTipoFragment detalleTipo)
+    {
+        this.detalleTipo = detalleTipo;
+    }
+
+    public TipoCallback(ListadoTiposFragment listadoTipos)
+    {
+        this.listadoTipos = listadoTipos;
     }
 
     public List<Tipo> getTiposPokes()
@@ -36,7 +48,15 @@ public class TipoCallback implements Callback<List<Tipo>>
     {
         tipos = response.body();
 
-        detallePokemon.tipoResponse(tipos);
+        if(detallePokemon!=null)
+            detallePokemon.tipoResponse(tipos);
+        else
+            if(listadoTipos!=null)
+                listadoTipos.tipoResponse(tipos);
+            else
+                if(detalleTipo!=null)
+                    detalleTipo.tipoResponse(tipos);
+
     }
 
     @Override

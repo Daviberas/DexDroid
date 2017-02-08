@@ -18,7 +18,14 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import es.iesnervion.dbenitez.dexdroid.Models.Evolucion;
+import es.iesnervion.dbenitez.dexdroid.Models.Habilidad;
+import es.iesnervion.dbenitez.dexdroid.Models.HabilidadesPokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Movimiento;
+import es.iesnervion.dbenitez.dexdroid.Models.MovimientosPokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
 import es.iesnervion.dbenitez.dexdroid.Models.Tipo;
+import es.iesnervion.dbenitez.dexdroid.Models.TiposPokemon;
 import es.iesnervion.dbenitez.dexdroid.R;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.PokemonInterface;
 import es.iesnervion.dbenitez.dexdroid.RetrofitInterfaces.TipoInterface;
@@ -28,9 +35,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListadoTiposFragment extends ListFragment implements Callback<List<Tipo>>
+public class ListadoTiposFragment extends ListFragment implements ApiResponse
 {
-    private List<Tipo> tipos;
+    Tipo[] arrayTipos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -42,7 +49,8 @@ public class ListadoTiposFragment extends ListFragment implements Callback<List<
         Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
         TipoInterface ti= retrofit.create(TipoInterface.class);
 
-        ti.getTipo().enqueue(this);
+        TipoCallback tipoCallback = new TipoCallback(this);
+        ti.getTipo().enqueue(tipoCallback);
 
         return(result);
     }
@@ -55,20 +63,47 @@ public class ListadoTiposFragment extends ListFragment implements Callback<List<
         EventBus.getDefault().post(new TipoClickedEvent(tipo));
     }
 
+    @Override
+    public void pokemonResponse(List<Pokemon> poke, boolean evolucion) {
+
+    }
+
+    @Override
+    public void tiposPokemonResponse(List<TiposPokemon> tiposPoke) {
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onResponse(Call<List<Tipo>> call, Response<List<Tipo>> response)
+    public void tipoResponse(List<Tipo> tipos)
     {
-        tipos = response.body();
-        Tipo[] arrayTipos =new Tipo[tipos.size()];
+        arrayTipos =new Tipo[tipos.size()];
         setListAdapter(new ListadoTiposFragment.AdapterIcono<Tipo>(this.getContext(), R.layout.row, R.id.texto,tipos.toArray(arrayTipos)));
     }
 
     @Override
-    public void onFailure(Call<List<Tipo>> call, Throwable t)
-    {
-        Toast.makeText(getActivity(), t.getMessage(),Toast.LENGTH_SHORT).show();
-        Log.e(getClass().getSimpleName(),"Exception from Retrofit request to StackOverflow", t);
+    public void habilidadesPokemonResponse(List<HabilidadesPokemon> habilidadesPoke) {
+
+    }
+
+    @Override
+    public void habilidadResponse(List<Habilidad> habilidades, String categoria) {
+
+    }
+
+    @Override
+    public void evolucionResponse(List<Evolucion> evoluciones) {
+
+    }
+
+    @Override
+    public void movimientosPokemonResponse(List<MovimientosPokemon> movimientosPokemon) {
+
+    }
+
+    @Override
+    public void movimientoResponse(List<Movimiento> movimientos) {
+
     }
 
     class AdapterIcono<T> extends ArrayAdapter<T>
@@ -98,7 +133,7 @@ public class ListadoTiposFragment extends ListFragment implements Callback<List<
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getTv().setText(tipos.get(position).getNombre());
+            holder.getTv().setText(arrayTipos[position].getNombre());
 
             return (row);
         }
