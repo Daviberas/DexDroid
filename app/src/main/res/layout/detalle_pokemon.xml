@@ -105,7 +105,8 @@
                     <TextView
                         android:id="@+id/habilidadSecundariaPokemon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -114,24 +115,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:visibility="gone">
+                android:layout_marginRight="20dp">
                 <TextView
+                    android:id="@+id/txtHO"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Habilidad Oculta:"/>
+                    android:text="Habilidad Oculta:"
+                    android:visibility="gone"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/habilidadOcultaPrimariaPokemon"
+                        android:id="@+id/habilidadOcultaPokemon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                     <TextView
                         android:id="@+id/habilidadOcultaSecundariaPokemon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -140,16 +144,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:visibility="gone">
+                android:layout_marginRight="20dp">
                 <TextView
+                    android:id="@+id/txtEvolucion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Evolución:"/>
-                <TextView
+                    android:text="Evolución:"
+                    android:visibility="gone"/>
+                <ListView
                     android:id="@+id/evolucionPokemon"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <TableLayout

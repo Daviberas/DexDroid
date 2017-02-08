@@ -13,12 +13,14 @@ import retrofit2.Response;
 public class PokemonCallback implements Callback<List<Pokemon>>
 {
     List<Pokemon> pokes;
+    boolean evolucion;
     DetallePokemonFragment detallePokemon;
     ListadoPokemonFragment listadoPokemonFragment;
 
-    public PokemonCallback(DetallePokemonFragment detallePokemonFragment)
+    public PokemonCallback(DetallePokemonFragment detallePokemonFragment, boolean evolucion)
     {
         this.detallePokemon = detallePokemonFragment;
+        this.evolucion = evolucion;
     }
 
     public PokemonCallback(ListadoPokemonFragment listadoPokemonFragment)
@@ -44,12 +46,12 @@ public class PokemonCallback implements Callback<List<Pokemon>>
 
         if(detallePokemon != null)
         {
-            detallePokemon.pokemonResponse(pokes);
+            detallePokemon.pokemonResponse(pokes,evolucion);
         }
         else
             if(listadoPokemonFragment != null)
             {
-                listadoPokemonFragment.pokemonResponse(pokes);
+                listadoPokemonFragment.pokemonResponse(pokes,evolucion);
             }
     }
 

@@ -14,6 +14,11 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
+import es.iesnervion.dbenitez.dexdroid.Models.Evolucion;
+import es.iesnervion.dbenitez.dexdroid.Models.Habilidad;
+import es.iesnervion.dbenitez.dexdroid.Models.HabilidadesPokemon;
+import es.iesnervion.dbenitez.dexdroid.Models.Movimiento;
+import es.iesnervion.dbenitez.dexdroid.Models.MovimientosPokemon;
 import es.iesnervion.dbenitez.dexdroid.Models.Pokemon;
 import es.iesnervion.dbenitez.dexdroid.Models.Tipo;
 import es.iesnervion.dbenitez.dexdroid.Models.TiposPokemon;
@@ -55,7 +60,7 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void pokemonResponse(List<Pokemon> pokes)
+    public void pokemonResponse(List<Pokemon> pokes,boolean evolucion)
     {
         arrayPokemon=new Pokemon[pokes.size()];
         setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
@@ -70,6 +75,31 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
     @Override
     public void tipoResponse(List<Tipo> tipos)
     {
+
+    }
+
+    @Override
+    public void habilidadesPokemonResponse(List<HabilidadesPokemon> habilidadesPoke) {
+
+    }
+
+    @Override
+    public void habilidadResponse(List<Habilidad> habilidades, String categoria) {
+
+    }
+
+    @Override
+    public void evolucionResponse(List<Evolucion> evoluciones) {
+
+    }
+
+    @Override
+    public void movimientosPokemonResponse(List<MovimientosPokemon> movimientosPokemon) {
+
+    }
+
+    @Override
+    public void movimientoResponse(List<Movimiento> movimientos) {
 
     }
 
