@@ -142,29 +142,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:minHeight="100sp"
+                android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
                 <TextView
                     android:id="@+id/txtEvolucion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Evolución:"
+                    android:text="Evoluciones posibles:"
                     android:visibility="gone"/>
                 <ListView
                     android:id="@+id/evolucionPokemon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
             </LinearLayout>
 
-            <TableLayout
-                android:id="@+id/tablaMovimientosPokemon"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
-            </TableLayout>
+                <TextView
+                    android:id="@+id/txtListaMov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Movimientos que puede aprender:"
+                    android:visibility="gone"/>
+                <ListView
+                    android:id="@+id/listaMov"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

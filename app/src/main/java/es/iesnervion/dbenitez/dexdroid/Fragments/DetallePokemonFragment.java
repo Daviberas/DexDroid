@@ -43,11 +43,12 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
 {
     public final static String ARG_ID = "id";
     int mCurrentPosition = -1;
-    Pokemon[] arrayPokemon;
-    List<String> metodosEvolucion;
-    List<String> aprendizajeMovimiento;
-    List<String> nombresMovimientos;
-    boolean tiposMovimientos = false;
+
+    List<Pokemon> listaPokes = new Vector<Pokemon>(0,1);
+    List<Movimiento> listaMov = new Vector<Movimiento>(0,1);
+    int tamanio;
+    int tamanioMov;
+    List<String> metodosEvolucion = new Vector<String>(0,1);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -93,55 +94,59 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void pokemonResponse(List<Pokemon> pokes, boolean evolucion)
+    public void pokemonResponse(List<Pokemon> poke, boolean evolucion)
     {
-        if (pokes != null)
+        if (poke != null)
         {
             if(evolucion)
             {
-                arrayPokemon=new Pokemon[pokes.size()];
-                TextView tv = (TextView) getActivity().findViewById(R.id.txtEvolucion);
-                tv.setVisibility(View.VISIBLE);
-                ListView evoluciones = (ListView) getActivity().findViewById(R.id.evolucionPokemon);
-                evoluciones.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
-                evoluciones.setVisibility(View.VISIBLE);
+                listaPokes.add(poke.get(0));
+                if(listaPokes.size()==tamanio)
+                {
+                    TextView tv = (TextView) getActivity().findViewById(R.id.txtEvolucion);
+                    tv.setVisibility(View.VISIBLE);
+                    ListView lista = (ListView) getActivity().findViewById(R.id.evolucionPokemon);
+                    lista.setVisibility(View.VISIBLE);
+                    Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
+                    lista.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,listaPokes.toArray(arrayPokemon)));
+                }
             }
             else
             {
-                Pokemon poke = pokes.get(0);
+                Pokemon pokemon = poke.get(0);
 
                 TextView num = (TextView) getActivity().findViewById(R.id.numPokemon);
-                num.setText("" + poke.getNumPokedex());
+                num.setText("" + pokemon.getNumPokedex());
 
                 TextView nombre = (TextView) getActivity().findViewById(R.id.nombrePokemon);
-                nombre.setText(poke.getNombre());
+                nombre.setText(pokemon.getNombre());
 
                 TextView porcentajeHembra = (TextView) getActivity().findViewById(R.id.porcentajeHembraPokemon);
-                porcentajeHembra.setText("" + poke.getPorcentajeHembra());
+                porcentajeHembra.setText("" + pokemon.getPorcentajeHembra());
 
                 TextView porcentajeMacho = (TextView) getActivity().findViewById(R.id.porcentajeMachoPokemon);
-                porcentajeMacho.setText("" + poke.getPorcentajeMacho());
+                porcentajeMacho.setText("" + pokemon.getPorcentajeMacho());
 
                 Retrofit retrofit = new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
                 TiposPokemonInterface tpi = retrofit.create(TiposPokemonInterface.class);
 
                 TiposPokemonCallback tiposPokemonCallback = new TiposPokemonCallback(this);
-                tpi.getTiposPokemon(poke.getNumPokedex()).enqueue(tiposPokemonCallback);
+                tpi.getTiposPokemon(pokemon.getNumPokedex()).enqueue(tiposPokemonCallback);
 
                 HabilidadesPokemonInterface hpi = retrofit.create(HabilidadesPokemonInterface.class);
 
                 HabilidadesPokemonCallback habilidadesPokemonCallback = new HabilidadesPokemonCallback(this);
-                hpi.getHabilidadesPokemon(poke.getNumPokedex()).enqueue(habilidadesPokemonCallback);
+                hpi.getHabilidadesPokemon(pokemon.getNumPokedex()).enqueue(habilidadesPokemonCallback);
 
                 EvolucionInterface ei = retrofit.create(EvolucionInterface.class);
 
                 EvolucionCallback evolucionCallback = new EvolucionCallback(this);
-                ei.getEvolucion(poke.getNumPokedex()).enqueue(evolucionCallback);
+                ei.getEvolucion(pokemon.getNumPokedex()).enqueue(evolucionCallback);
 
                 MovimientosPokemonInterface mpi = retrofit.create(MovimientosPokemonInterface.class);
 
                 MovimientosPokemonCallback movimientosPokemonCallback = new MovimientosPokemonCallback(this);
-                mpi.getMovimientosPokemon(poke.getNumPokedex()).enqueue(movimientosPokemonCallback);
+                mpi.getMovimientosPokemon(pokemon.getNumPokedex()).enqueue(movimientosPokemonCallback);
             }
         }
     }
@@ -241,7 +246,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     {
         if (evoluciones != null)
         {
-            metodosEvolucion = new Vector<String>(0,1);
+            tamanio = evoluciones.size();
             for(int i = 0; i<evoluciones.size();i++)
             {
                 metodosEvolucion.add(evoluciones.get(i).getMetodo());
@@ -257,13 +262,38 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     @Override
     public void movimientosPokemonResponse(List<MovimientosPokemon> movimientosPokemon)
     {
+        if (movimientosPokemon != null)
+        {
+            tamanioMov = movimientosPokemon.size();
+            for(int i = 0; i<movimientosPokemon.size();i++)
+            {
+                Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
+                MovimientoInterface mi= retrofit.create(MovimientoInterface.class);
 
+                MovimientoCallback movimientoCallback = new MovimientoCallback(this);
+                mi.getMovimiento(movimientosPokemon.get(i).getIdMovimiento()).enqueue(movimientoCallback);
+            }
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void movimientoResponse(List<Movimiento> movimientos)
     {
-
+        if (movimientos != null)
+        {
+            listaMov.add(movimientos.get(0));
+            if(listaMov.size()==tamanioMov)
+            {
+                TextView tv = (TextView) getActivity().findViewById(R.id.txtListaMov);
+                tv.setVisibility(View.VISIBLE);
+                ListView lista = (ListView) getActivity().findViewById(R.id.listaMov);
+                lista.setVisibility(View.VISIBLE);
+                Movimiento[] arrayMovimientos=new Movimiento[listaMov.size()];
+                listaMov.toArray(arrayMovimientos);
+                lista.setAdapter(new AdapterIcono2<Movimiento>(getContext(), R.layout.row, R.id.texto,arrayMovimientos));
+            }
+        }
     }
 
     @Override
@@ -300,7 +330,43 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getTv().setText(arrayPokemon[position].getNombre()+": "+metodosEvolucion.get(position));
+            holder.getTv().setText(listaPokes.get(position).getNombre()+": "+metodosEvolucion.get(position));
+
+            return (row);
+        }
+    }
+
+    class AdapterIcono2<T> extends ArrayAdapter<T>
+    {
+        private Movimiento[] miLista;
+        AdapterIcono2(Context c, int resourceId, int textId, T[] objects)
+        {
+            super(c, resourceId, textId, objects);
+            this.miLista=(Movimiento[]) objects;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View row = convertView;
+            ViewHolder holder;
+
+            if (row==null)
+            {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                row=inflater.inflate(R.layout.row, parent, false);
+
+                TextView tv = (TextView) row.findViewById(R.id.texto);
+
+
+                holder = new ViewHolder (tv);
+                row.setTag(holder);
+            }
+            else
+            {
+                holder = (ViewHolder) row.getTag();
+            }
+
+            holder.getTv().setText(miLista[position].getNombre());
 
             return (row);
         }

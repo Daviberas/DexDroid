@@ -14,4 +14,10 @@ public interface MovimientosPokemonInterface
 
     @GET("MovimientosPokemon/{id}")
     Call<List<MovimientosPokemon>> getMovimientosPokemon(@Path("id") int id);
+
+    @GET("PokemonMovimiento")
+    Call<List<MovimientosPokemon>> getPokemonMovimiento();
+
+    @GET("PokemonMovimiento/{id}")
+    Call<List<MovimientosPokemon>> getPokemonMovimiento(@Path("id") int id);
 }

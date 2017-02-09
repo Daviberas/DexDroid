@@ -148,7 +148,8 @@ public class DetalleHabilidadFragment extends Fragment implements ApiResponse
     }
 
     @Override
-    public void evolucionResponse(List<Evolucion> evoluciones) {
+    public void evolucionResponse(List<Evolucion> evoluciones)
+    {
 
     }
 
