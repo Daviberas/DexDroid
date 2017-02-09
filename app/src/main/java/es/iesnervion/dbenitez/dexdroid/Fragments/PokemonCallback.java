@@ -15,12 +15,26 @@ public class PokemonCallback implements Callback<List<Pokemon>>
     List<Pokemon> pokes;
     boolean evolucion;
     DetallePokemonFragment detallePokemon;
+    DetalleTipoFragment detalleTipoFragment;
     ListadoPokemonFragment listadoPokemonFragment;
+    DetalleHabilidadFragment detalleHabilidad;
 
     public PokemonCallback(DetallePokemonFragment detallePokemonFragment, boolean evolucion)
     {
         this.detallePokemon = detallePokemonFragment;
         this.evolucion = evolucion;
+    }
+
+    public PokemonCallback(DetalleTipoFragment detalleTipoFragment)
+    {
+        this.detalleTipoFragment = detalleTipoFragment;
+        this.evolucion = false;
+    }
+
+    public PokemonCallback(DetalleHabilidadFragment detalleHabilidad)
+    {
+        this.detalleHabilidad = detalleHabilidad;
+        this.evolucion = false;
     }
 
     public PokemonCallback(ListadoPokemonFragment listadoPokemonFragment)
@@ -53,6 +67,16 @@ public class PokemonCallback implements Callback<List<Pokemon>>
             {
                 listadoPokemonFragment.pokemonResponse(pokes,evolucion);
             }
+            else
+                if(detalleTipoFragment != null)
+                {
+                    detalleTipoFragment.pokemonResponse(pokes,evolucion);
+                }
+                else
+                    if(detalleHabilidad != null)
+                    {
+                        detalleHabilidad.pokemonResponse(pokes,evolucion);
+                    }
     }
 
     @Override

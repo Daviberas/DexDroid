@@ -6,9 +6,10 @@
         android:id="@+id/txtTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pokémon de este tipo:"/>
+        android:text="Pokémon de tipo"/>
     <GridView
         android:id="@+id/gridPokemonTipo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></GridView>
+        android:layout_height="wrap_content"
+        android:numColumns="3"></GridView>
 </LinearLayout>

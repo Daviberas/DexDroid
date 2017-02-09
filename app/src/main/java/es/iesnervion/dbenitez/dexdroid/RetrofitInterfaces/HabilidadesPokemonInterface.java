@@ -14,4 +14,10 @@ public interface HabilidadesPokemonInterface
 
     @GET("HabilidadesPokemon/{id}")
     Call<List<HabilidadesPokemon>> getHabilidadesPokemon(@Path("id") int id);
+
+    @GET("PokemonHabilidad")
+    Call<List<HabilidadesPokemon>> getPokemonHabilidad();
+
+    @GET("PokemonHabilidad/{id}")
+    Call<List<HabilidadesPokemon>> getPokemonHabilidad(@Path("id") int id);
 }

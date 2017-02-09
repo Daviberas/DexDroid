@@ -51,11 +51,11 @@ public class MovimientoCallback implements Callback<List<Movimiento>>
         if(detallePokemon!=null)
             detallePokemon.movimientoResponse(movimientos);
         else
-            if(listadoMovimientos!=null)
-                listadoMovimientos.movimientoResponse(movimientos);
-            else
-                if(detalleMovimiento!=null)
-                    detalleMovimiento.movimientoResponse(movimientos);
+        if(listadoMovimientos!=null)
+            listadoMovimientos.movimientoResponse(movimientos);
+        else
+        if(detalleMovimiento!=null)
+            detalleMovimiento.movimientoResponse(movimientos);
     }
 
     @Override

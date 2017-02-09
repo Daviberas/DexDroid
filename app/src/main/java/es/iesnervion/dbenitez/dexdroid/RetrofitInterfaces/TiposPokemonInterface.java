@@ -14,4 +14,10 @@ public interface TiposPokemonInterface
 
     @GET("TiposPokemon/{id}")
     Call<List<TiposPokemon>> getTiposPokemon(@Path("id") int id);
+
+    @GET("PokemonTipo")
+    Call<List<TiposPokemon>> getPokemonTipo();
+
+    @GET("PokemonTipo/{id}")
+    Call<List<TiposPokemon>> getPokemonTipo(@Path("id") int id);
 }

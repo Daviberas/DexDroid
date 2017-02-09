@@ -153,7 +153,6 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
                 tv.setText(mov.getContacto());
             }
 
-            //TODO implementar el adapter para el gridview de movimiento y rellenarlo con los pokemon de ese movimiento
         }
     }
 }
