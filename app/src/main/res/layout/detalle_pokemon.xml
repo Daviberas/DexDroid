@@ -30,12 +30,14 @@
                         <TextView
                             android:id="@+id/numPokemon"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"/>
                         <TextView
                             android:id="@+id/nombrePokemon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="10dp"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -44,17 +46,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tipo:"/>
+                            android:text="Tipo: "
+                            android:textSize="20sp"/>
                         <TextView
                             android:id="@+id/txtTipoPokemon"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="1dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,11 +67,14 @@
                         <ImageView
                             android:id="@+id/imgMacho"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/male_icon"
+                            android:maxHeight="1dp"/>
                         <TextView
                             android:id="@+id/porcentajeMachoPokemon"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -75,11 +83,14 @@
                         <ImageView
                             android:id="@+id/imgHembra"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/female_icon"
+                            android:maxHeight="10dp"/>
                         <TextView
                             android:id="@+id/porcentajeHembraPokemon"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -93,7 +104,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Habilidad:"/>
+                    android:text="Habilidad:"
+                    android:textSize="20sp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,12 +113,14 @@
                     <TextView
                         android:id="@+id/habilidadPokemon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
                     <TextView
                         android:id="@+id/habilidadSecundariaPokemon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:textSize="20sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -121,7 +135,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Habilidad Oculta:"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,12 +145,14 @@
                         android:id="@+id/habilidadOcultaPokemon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:textSize="20sp"/>
                     <TextView
                         android:id="@+id/habilidadOcultaSecundariaPokemon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:textSize="20sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -151,12 +168,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Evoluciones posibles:"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
                 <ListView
                     android:id="@+id/evolucionPokemon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -170,12 +189,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Movimientos que puede aprender:"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
                 <ListView
                     android:id="@+id/listaMov"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="100sp"
+                    android:layout_height="200sp"
                     android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
