@@ -38,6 +38,8 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
     List<Pokemon> listaPokes = new Vector<Pokemon>(0,1);
     int tamanio;
 
+    public boolean terminado = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -92,6 +94,7 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
                 GridView grid = (GridView) getActivity().findViewById(R.id.gridPokemonMovimiento);
                 Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
                 grid.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
+                terminado = true;
             }
         }
     }
@@ -135,7 +138,7 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
                 PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
                 PokemonCallback pokemonCallback = new PokemonCallback(this);
-                pi.getPokemon(movimientosPokemon.get(0).getIdPokemon()).enqueue(pokemonCallback);
+                pi.getPokemon(movimientosPokemon.get(i).getIdPokemon()).enqueue(pokemonCallback);
             }
         }
     }
@@ -208,9 +211,9 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
 
             if (row==null){
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-                row=inflater.inflate(R.layout.row, parent, false);
+                row=inflater.inflate(R.layout.elemento_grid, parent, false);
 
-                TextView tv = (TextView) row.findViewById(R.id.texto);
+                TextView tv = (TextView) row.findViewById(R.id.textoGrid);
 
 
                 holder = new ViewHolder (tv);

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     List<Movimiento> listaMov = new Vector<Movimiento>(0,1);
     int tamanio;
     int tamanioMov;
+    public boolean terminado = false;
     List<String> metodosEvolucion = new Vector<String>(0,1);
 
     @Override
@@ -176,10 +178,13 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
 
             TextView txtTipo = (TextView) getActivity().findViewById(R.id.txtTipoPokemon);
             String txtPrevio = (String) txtTipo.getText();
-            if (txtPrevio == "")
-                txtTipo.setText(tipo.getNombre());
-            else
-                txtTipo.setText(txtPrevio + " / " + tipo.getNombre());
+            if(!txtPrevio.contains(tipo.getNombre()))
+            {
+                if (txtPrevio == "")
+                    txtTipo.setText(tipo.getNombre());
+                else
+                    txtTipo.setText(txtPrevio + " / " + tipo.getNombre());
+            }
         }
     }
 
@@ -292,6 +297,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                 Movimiento[] arrayMovimientos=new Movimiento[listaMov.size()];
                 listaMov.toArray(arrayMovimientos);
                 lista.setAdapter(new AdapterIcono2<Movimiento>(getContext(), R.layout.row, R.id.texto,arrayMovimientos));
+                terminado = true;
             }
         }
     }
@@ -371,4 +377,6 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
             return (row);
         }
     }
+
+
 }

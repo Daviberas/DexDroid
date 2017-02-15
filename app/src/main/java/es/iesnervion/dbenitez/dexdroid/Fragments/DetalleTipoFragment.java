@@ -37,6 +37,8 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
     List<Pokemon> listaPokes = new Vector<Pokemon>(0,1);
     int tamanio;
 
+    public boolean terminado = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -91,6 +93,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
                 GridView grid = (GridView) getActivity().findViewById(R.id.gridPokemonTipo);
                 Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
                 grid.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
+                terminado = true;
             }
         }
     }
@@ -107,7 +110,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
                 PokemonInterface pi= retrofit.create(PokemonInterface.class);
 
                 PokemonCallback pokemonCallback = new PokemonCallback(this);
-                pi.getPokemon(tiposPoke.get(0).getIdPokemon()).enqueue(pokemonCallback);
+                pi.getPokemon(tiposPoke.get(i).getIdPokemon()).enqueue(pokemonCallback);
             }
         }
     }
@@ -118,13 +121,17 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
         if(tipos!=null)
         {
             TextView tv = (TextView) getActivity().findViewById(R.id.txtTipo);
-            tv.setText(tv.getText()+" "+tipos.get(0).getNombre()+":");
+            String txtPrevio = (String) tv.getText();
+            if(!txtPrevio.contains(tipos.get(0).getNombre()))
+            {
+                tv.setText(tv.getText() + " " + tipos.get(0).getNombre() + ":");
 
-            Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
-            TiposPokemonInterface tpi= retrofit.create(TiposPokemonInterface.class);
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
+                TiposPokemonInterface tpi = retrofit.create(TiposPokemonInterface.class);
 
-            PokemonTipoCallback pokemonTipoCallback = new PokemonTipoCallback(this);
-            tpi.getPokemonTipo(tipos.get(0).getId()).enqueue(pokemonTipoCallback);
+                PokemonTipoCallback pokemonTipoCallback = new PokemonTipoCallback(this);
+                tpi.getPokemonTipo(tipos.get(0).getId()).enqueue(pokemonTipoCallback);
+            }
         }
     }
 
@@ -167,9 +174,9 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
 
             if (row==null){
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-                row=inflater.inflate(R.layout.row, parent, false);
+                row=inflater.inflate(R.layout.elemento_grid, parent, false);
 
-                TextView tv = (TextView) row.findViewById(R.id.texto);
+                TextView tv = (TextView) row.findViewById(R.id.textoGrid);
 
 
                 holder = new ViewHolder (tv);

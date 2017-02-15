@@ -3,6 +3,7 @@ package es.iesnervion.dbenitez.dexdroid.Activities;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -61,7 +62,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else
         {
-            super.onBackPressed();
+            DetallePokemonFragment pokeFragment = (DetallePokemonFragment) getFragmentManager().findFragmentByTag("pokemonFragment");
+            DetalleTipoFragment tipoFragment = (DetalleTipoFragment) getFragmentManager().findFragmentByTag("tipoFragment");
+            DetalleHabilidadFragment habilidadFragment = (DetalleHabilidadFragment) getFragmentManager().findFragmentByTag("habilidadFragment");
+            DetalleMovimientoFragment movimientoFragment = (DetalleMovimientoFragment) getFragmentManager().findFragmentByTag("movimientoFragment");
+            if(pokeFragment!=null)
+            {
+                if(pokeFragment.terminado==true)
+                    super.onBackPressed();
+            }
+            else
+                if(tipoFragment!=null)
+                {
+                    if(tipoFragment.terminado==true)
+                        super.onBackPressed();
+                }
+                else
+                    if(habilidadFragment!=null)
+                    {
+                        if(habilidadFragment.terminado==true)
+                            super.onBackPressed();
+                    }
+                    else
+                        if(movimientoFragment!=null)
+                        {
+                            if(movimientoFragment.terminado==true)
+                                super.onBackPressed();
+                        }
+                        else
+                            if(pokeFragment==null && tipoFragment==null && habilidadFragment == null && movimientoFragment==null)
+                                super.onBackPressed();
         }
     }
 
@@ -71,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
 
         switch (id)
         {
@@ -141,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.content_main,fragment);
+        transaction.replace(R.id.content_main,fragment,"pokemonFragment");
         transaction.addToBackStack(null);
 
         transaction.commit();
@@ -156,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.content_main,fragment);
+        transaction.replace(R.id.content_main,fragment,"tipoFragment");
         transaction.addToBackStack(null);
 
         transaction.commit();
@@ -171,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.content_main,fragment);
+        transaction.replace(R.id.content_main,fragment,"habilidadFragment");
         transaction.addToBackStack(null);
 
         transaction.commit();
@@ -186,9 +217,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.content_main,fragment);
+        transaction.replace(R.id.content_main,fragment,"movimientoFragment");
         transaction.addToBackStack(null);
 
         transaction.commit();
     }
+
+
 }
