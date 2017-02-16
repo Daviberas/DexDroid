@@ -68,7 +68,7 @@
                             android:id="@+id/imgMacho"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/male_icon"
+                            android:src="@drawable/male"
                             android:maxHeight="1dp"/>
                         <TextView
                             android:id="@+id/porcentajeMachoPokemon"
@@ -84,7 +84,7 @@
                             android:id="@+id/imgHembra"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/female_icon"
+                            android:src="@drawable/female"
                             android:maxHeight="10dp"/>
                         <TextView
                             android:id="@+id/porcentajeHembraPokemon"
