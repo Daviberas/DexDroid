@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Collection;
@@ -49,6 +50,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     List<Movimiento> listaMov = new Vector<Movimiento>(0,1);
     int tamanio;
     int tamanioMov;
+    int altura;
     public boolean terminado = false;
     List<String> metodosEvolucion = new Vector<String>(0,1);
 
@@ -108,20 +110,28 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                     TextView tv = (TextView) getActivity().findViewById(R.id.txtEvolucion);
                     tv.setVisibility(View.VISIBLE);
                     ListView lista = (ListView) getActivity().findViewById(R.id.evolucionPokemon);
-                    lista.setVisibility(View.VISIBLE);
                     Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
                     lista.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,listaPokes.toArray(arrayPokemon)));
+                    lista.setVisibility(View.VISIBLE);
                 }
             }
             else
             {
                 Pokemon pokemon = poke.get(0);
 
-                TextView num = (TextView) getActivity().findViewById(R.id.numPokemon);
-                num.setText("" + pokemon.getNumPokedex());
+                TextView pokimon = (TextView) getActivity().findViewById(R.id.pokemon);
+                int numPokedex = pokemon.getNumPokedex();
+                String cabecera = "";
+                if(numPokedex<100)
+                    cabecera += "0";
+                if(numPokedex<10)
+                    cabecera += "0";
 
-                TextView nombre = (TextView) getActivity().findViewById(R.id.nombrePokemon);
-                nombre.setText(pokemon.getNombre());
+                cabecera+=numPokedex;
+
+                cabecera += " " + pokemon.getNombre();
+
+                pokimon.setText(cabecera);
 
                 TextView porcentajeHembra = (TextView) getActivity().findViewById(R.id.porcentajeHembraPokemon);
                 porcentajeHembra.setText("" + pokemon.getPorcentajeHembra());
@@ -362,7 +372,6 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                 row=inflater.inflate(R.layout.row, parent, false);
 
                 TextView tv = (TextView) row.findViewById(R.id.texto);
-
 
                 holder = new ViewHolder (tv);
                 row.setTag(holder);

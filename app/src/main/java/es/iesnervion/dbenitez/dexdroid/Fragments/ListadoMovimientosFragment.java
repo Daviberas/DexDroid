@@ -126,6 +126,9 @@ public class ListadoMovimientosFragment extends ListFragment implements ApiRespo
 
                 holder = new ViewHolder (tv);
                 row.setTag(holder);
+
+                getListView().setDivider(null);
+                getListView().setDividerHeight(0);
             }
             else
             {

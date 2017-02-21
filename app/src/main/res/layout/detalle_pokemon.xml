@@ -2,201 +2,253 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+                android:layout_height="match_parent">
+
                 <ImageView
                     android:id="@+id/imgPokemon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/numPokemon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"/>
-                        <TextView
-                            android:id="@+id/nombrePokemon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="20sp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tipo: "
-                            android:textSize="20sp"/>
-                        <TextView
-                            android:id="@+id/txtTipoPokemon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"/>
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="1dp">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:id="@+id/imgMacho"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/male"
-                            android:maxHeight="1dp"/>
-                        <TextView
-                            android:id="@+id/porcentajeMachoPokemon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:id="@+id/imgHembra"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/female"
-                            android:maxHeight="10dp"/>
-                        <TextView
-                            android:id="@+id/porcentajeHembraPokemon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
                 <TextView
+                    android:id="@+id/pokemon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Habilidad:"
-                    android:textSize="20sp"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/habilidadPokemon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"/>
-                    <TextView
-                        android:id="@+id/habilidadSecundariaPokemon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:textSize="20sp"/>
-                </LinearLayout>
-            </LinearLayout>
+                    android:layout_below="@id/imgPokemon"
+                    android:maxLines="3"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/txtTipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pokemon"
+                    android:maxLines="3"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:text="Tipo: "
+                    android:textColor="#666"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/txtTipoPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pokemon"
+                    android:layout_toRightOf="@id/txtTipo"
+                    android:layout_centerVertical="true"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#666"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/imgMacho"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/male"
+                    android:layout_alignBottom="@id/pokemon"
+                    android:layout_toRightOf="@id/txtTipoPokemon"
+                    android:layout_below="@id/imgPokemon"
+                    android:maxHeight="1dp"/>
+
+                <TextView
+                    android:id="@+id/porcentajeMachoPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/imgMacho"
+                    android:padding="8dp"
+                    android:layout_below="@id/imgPokemon"
+                    android:textSize="20sp"/>
+
+                <ImageView
+                    android:id="@+id/imgHembra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/female"
+                    android:layout_alignBottom="@id/pokemon"
+                    android:layout_below="@id/imgPokemon"
+                    android:layout_toRightOf="@id/porcentajeMachoPokemon"
+                    android:maxHeight="1dp"/>
+
+                <TextView
+                    android:id="@+id/porcentajeHembraPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgPokemon"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:layout_toRightOf="@id/imgHembra"
+                    android:textSize="20sp"/>
+
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"
+                    android:alpha="0.12"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/txtTipoPokemon"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"/>
+
+                <TextView
+                    android:id="@+id/txtHabilidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/separator"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:layout_centerVertical="true"
+                    android:text="Habilidad: "
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
+                <TextView
+                    android:id="@+id/habilidadPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/separator"
+                    android:layout_toRightOf="@id/txtHabilidad"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
+                <TextView
+                    android:id="@+id/habilidadSecundariaPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@id/separator"
+                    android:padding="8dp"
+                    android:layout_toRightOf="@id/habilidadPokemon"
+                    android:maxLines="3"
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
                 <TextView
                     android:id="@+id/txtHO"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Habilidad Oculta:"
-                    android:visibility="gone"
-                    android:textSize="20sp"/>
-                <LinearLayout
+                    android:layout_below="@id/txtHabilidad"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:layout_centerVertical="true"
+                    android:text="Habilidad oculta: "
+                    android:textColor="#666"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/habilidadOcultaPokemon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/habilidadOcultaPokemon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:textSize="20sp"/>
-                    <TextView
-                        android:id="@+id/habilidadOcultaSecundariaPokemon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:textSize="20sp"/>
-                </LinearLayout>
-            </LinearLayout>
+                    android:layout_centerVertical="true"
+                    android:layout_below="@id/txtHabilidad"
+                    android:layout_toRightOf="@id/txtHO"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="100sp"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/habilidadOcultaSecundariaPokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtHabilidad"
+                    android:layout_toRightOf="@id/habilidadOcultaPokemon"
+                    android:layout_centerVertical="true"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"
+                    android:alpha="0.12"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/txtHO"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"/>
+
                 <TextView
                     android:id="@+id/txtEvolucion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Evoluciones posibles:"
-                    android:visibility="gone"
-                    android:textSize="20sp"/>
+                    android:layout_below="@id/separator2"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:text="Evoluciones posibles: "
+                    android:layout_centerVertical="true"
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
                 <ListView
                     android:id="@+id/evolucionPokemon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_below="@id/txtEvolucion"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"
+                    android:alpha="0.12"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/evolucionPokemon"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"/>
+
                 <TextView
                     android:id="@+id/txtListaMov"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movimientos que puede aprender:"
-                    android:visibility="gone"
-                    android:textSize="20sp"/>
+                    android:layout_below="@id/separator3"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:layout_centerVertical="true"
+                    android:text="Movimientos que puede aprender: "
+                    android:textColor="#666"
+                    android:textSize="14dp"  />
+
                 <ListView
                     android:id="@+id/listaMov"
                     android:layout_width="match_parent"
-                    android:layout_height="200sp"
-                    android:visibility="gone"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtListaMov"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    />
+            </RelativeLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
