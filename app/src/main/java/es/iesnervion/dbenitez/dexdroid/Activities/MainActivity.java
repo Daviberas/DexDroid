@@ -3,7 +3,6 @@ package es.iesnervion.dbenitez.dexdroid.Activities;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -203,28 +202,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DetalleTipoFragment tipoFragment = (DetalleTipoFragment) getFragmentManager().findFragmentByTag("tipoFragment");
         DetalleHabilidadFragment habilidadFragment = (DetalleHabilidadFragment) getFragmentManager().findFragmentByTag("habilidadFragment");
         DetalleMovimientoFragment movimientoFragment = (DetalleMovimientoFragment) getFragmentManager().findFragmentByTag("movimientoFragment");
-        if(pokeFragment!=null)
+        if(pokeFragment!=null && pokeFragment.terminado)
         {
-            if(pokeFragment.terminado==true)
-                puedeEjecutar = true;
+            puedeEjecutar = true;
         }
         else
-            if(tipoFragment!=null)
+            if(tipoFragment!=null && tipoFragment.terminado)
             {
-                if(tipoFragment.terminado==true)
-                    puedeEjecutar = true;
+                puedeEjecutar = true;
             }
             else
-                if(habilidadFragment!=null)
+                if(habilidadFragment!=null && habilidadFragment.terminado)
                 {
-                    if(habilidadFragment.terminado==true)
-                        puedeEjecutar = true;
+                    puedeEjecutar = true;
                 }
                 else
-                    if(movimientoFragment!=null)
+                    if(movimientoFragment!=null && movimientoFragment.terminado)
                     {
-                        if(movimientoFragment.terminado==true)
-                            puedeEjecutar = true;
+                        puedeEjecutar = true;
                     }
                     else
                         if(pokeFragment==null && tipoFragment==null && habilidadFragment == null && movimientoFragment==null)
