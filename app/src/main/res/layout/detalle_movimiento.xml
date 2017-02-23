@@ -179,7 +179,7 @@
                     android:text="@string/pokemonMov"
                     android:padding="8dp"
                     android:textColor="#222"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:gravity="center"
                     android:layout_below="@id/contacto"/>
 

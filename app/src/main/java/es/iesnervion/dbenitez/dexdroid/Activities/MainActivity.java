@@ -70,52 +70,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(noHayFragmentCargando())
-        switch (id)
-        {
-            case R.id.nav_pokemon:
-                ListadoPokemonFragment fragmentPokes = new ListadoPokemonFragment();
-                FragmentTransaction transactionPokes = getFragmentManager().beginTransaction();
+        if(noHayFragmentCargando()) {
+            switch (id) {
+                case R.id.nav_pokemon:
+                    ListadoPokemonFragment fragmentPokes = new ListadoPokemonFragment();
+                    FragmentTransaction transactionPokes = getFragmentManager().beginTransaction();
 
-                transactionPokes.replace(R.id.content_main,fragmentPokes);
-                transactionPokes.addToBackStack(null);
+                    transactionPokes.replace(R.id.content_main, fragmentPokes);
+                    transactionPokes.addToBackStack(null);
 
-                transactionPokes.commit();
-                break;
-            case R.id.nav_tipos:
-                ListadoTiposFragment fragmentTipos = new ListadoTiposFragment();
-                FragmentTransaction transactionTipos = getFragmentManager().beginTransaction();
+                    transactionPokes.commit();
+                    break;
+                case R.id.nav_tipos:
+                    ListadoTiposFragment fragmentTipos = new ListadoTiposFragment();
+                    FragmentTransaction transactionTipos = getFragmentManager().beginTransaction();
 
-                transactionTipos.replace(R.id.content_main,fragmentTipos);
-                transactionTipos.addToBackStack(null);
+                    transactionTipos.replace(R.id.content_main, fragmentTipos);
+                    transactionTipos.addToBackStack(null);
 
-                transactionTipos.commit();
-                break;
-            case R.id.nav_habilidades:
-                ListadoHabilidadesFragment fragmentHabilidades = new ListadoHabilidadesFragment();
-                FragmentTransaction transactionHabilidades = getFragmentManager().beginTransaction();
+                    transactionTipos.commit();
+                    break;
+                case R.id.nav_habilidades:
+                    ListadoHabilidadesFragment fragmentHabilidades = new ListadoHabilidadesFragment();
+                    FragmentTransaction transactionHabilidades = getFragmentManager().beginTransaction();
 
-                transactionHabilidades.replace(R.id.content_main,fragmentHabilidades);
-                transactionHabilidades.addToBackStack(null);
+                    transactionHabilidades.replace(R.id.content_main, fragmentHabilidades);
+                    transactionHabilidades.addToBackStack(null);
 
-                transactionHabilidades.commit();
-                break;
-            case R.id.nav_movimientos:
-                ListadoMovimientosFragment fragmentMovimientos = new ListadoMovimientosFragment();
-                FragmentTransaction transactionMovimientos = getFragmentManager().beginTransaction();
+                    transactionHabilidades.commit();
+                    break;
+                case R.id.nav_movimientos:
+                    ListadoMovimientosFragment fragmentMovimientos = new ListadoMovimientosFragment();
+                    FragmentTransaction transactionMovimientos = getFragmentManager().beginTransaction();
 
-                transactionMovimientos.replace(R.id.content_main,fragmentMovimientos);
-                transactionMovimientos.addToBackStack(null);
+                    transactionMovimientos.replace(R.id.content_main, fragmentMovimientos);
+                    transactionMovimientos.addToBackStack(null);
 
-                transactionMovimientos.commit();
-                break;
+                    transactionMovimientos.commit();
+                    break;
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
