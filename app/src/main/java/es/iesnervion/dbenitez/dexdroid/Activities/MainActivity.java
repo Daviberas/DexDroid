@@ -14,18 +14,18 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleHabilidadFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleMovimientoFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.DetallePokemonFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.DetalleTipoFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.HabilidadClickedEvent;
-import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoHabilidadesFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoMovimientosFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoPokemonFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.ListadoTiposFragment;
-import es.iesnervion.dbenitez.dexdroid.Fragments.MovimientoClickedEvent;
-import es.iesnervion.dbenitez.dexdroid.Fragments.PokemonClickedEvent;
-import es.iesnervion.dbenitez.dexdroid.Fragments.TipoClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleHabilidadFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleMovimientoFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetallePokemonFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleTipoFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ClickedEvents.HabilidadClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Listados.ListadoHabilidadesFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Listados.ListadoMovimientosFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Listados.ListadoPokemonFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Listados.ListadoTiposFragment;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ClickedEvents.MovimientoClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ClickedEvents.PokemonClickedEvent;
+import es.iesnervion.dbenitez.dexdroid.Fragments.ClickedEvents.TipoClickedEvent;
 import es.iesnervion.dbenitez.dexdroid.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
