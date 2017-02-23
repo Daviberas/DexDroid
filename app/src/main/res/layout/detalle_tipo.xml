@@ -2,14 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/txtTipo"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pokémon de tipo"/>
-    <GridView
-        android:id="@+id/gridPokemonTipo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"></GridView>
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:padding="8dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/txtTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtTipo"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="22sp"
+                    android:gravity="center"/>
+                <GridView
+                    android:id="@+id/gridPokemonTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:layout_below="@id/txtTipo"/>
+            </RelativeLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

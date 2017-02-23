@@ -2,22 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/nombreHabilidad"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/efectoHabilidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txtHabilidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pokémon con esta habilidad:"/>
-    <GridView
-        android:id="@+id/gridPokemonHabilidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"></GridView>
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:padding="8dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/nombreHabilidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/efectoHabilidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_margin="8dp"
+                    android:textColor="#222"
+                    android:textSize="16sp"
+                    android:layout_below="@id/nombreHabilidad"/>
+                <TextView
+                    android:id="@+id/txtHabilidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="22sp"
+                    android:text="@string/txtHabilidad"
+                    android:layout_below="@id/efectoHabilidad"
+                    android:gravity="center"/>
+                <GridView
+                    android:id="@+id/gridPokemonHabilidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:layout_below="@id/txtHabilidad"/>
+            </RelativeLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

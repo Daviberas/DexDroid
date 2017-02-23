@@ -4,9 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Vector;
 
 import es.iesnervion.dbenitez.dexdroid.Models.Evolucion;
@@ -51,6 +45,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     int tamanio;
     int tamanioMov;
     int altura;
+    int alturaMov;
     public boolean terminado = false;
     List<String> metodosEvolucion = new Vector<String>(0,1);
 
@@ -67,6 +62,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
             PokemonCallback pokemonCallback = new PokemonCallback(this,false);
             pi.getPokemon(mCurrentPosition).enqueue(pokemonCallback);
         }
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
 
         return inflater.inflate(R.layout.detalle_pokemon, container, false);
     }
@@ -262,6 +258,15 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
         if (evoluciones != null)
         {
             tamanio = evoluciones.size();
+
+            ListView lista = (ListView) getActivity().findViewById(R.id.evolucionPokemon);
+
+            ViewGroup.LayoutParams params = lista.getLayoutParams();
+
+            params.height = altura*tamanio;
+
+            lista.setLayoutParams(params);
+
             for(int i = 0; i<evoluciones.size();i++)
             {
                 metodosEvolucion.add(evoluciones.get(i).getMetodo());
@@ -280,6 +285,15 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
         if (movimientosPokemon != null)
         {
             tamanioMov = movimientosPokemon.size();
+
+            ListView lista = (ListView) getActivity().findViewById(R.id.listaMov);
+
+            ViewGroup.LayoutParams params = lista.getLayoutParams();
+
+            params.height = altura*tamanioMov;
+
+            lista.setLayoutParams(params);
+
             for(int i = 0; i<movimientosPokemon.size();i++)
             {
                 Retrofit retrofit= new Retrofit.Builder().baseUrl("http://dbenitez.ciclo.iesnervion.es").addConverterFactory(GsonConverterFactory.create()).build();
@@ -313,7 +327,8 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState)
+    {
         super.onSaveInstanceState(outState);
 
         outState.putInt(ARG_ID, mCurrentPosition);
@@ -336,7 +351,6 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                 row=inflater.inflate(R.layout.row, parent, false);
 
                 TextView tv = (TextView) row.findViewById(R.id.texto);
-
 
                 holder = new ViewHolder (tv);
                 row.setTag(holder);

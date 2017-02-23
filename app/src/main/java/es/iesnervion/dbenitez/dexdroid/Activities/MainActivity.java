@@ -62,36 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else
         {
-            DetallePokemonFragment pokeFragment = (DetallePokemonFragment) getFragmentManager().findFragmentByTag("pokemonFragment");
-            DetalleTipoFragment tipoFragment = (DetalleTipoFragment) getFragmentManager().findFragmentByTag("tipoFragment");
-            DetalleHabilidadFragment habilidadFragment = (DetalleHabilidadFragment) getFragmentManager().findFragmentByTag("habilidadFragment");
-            DetalleMovimientoFragment movimientoFragment = (DetalleMovimientoFragment) getFragmentManager().findFragmentByTag("movimientoFragment");
-            if(pokeFragment!=null)
-            {
-                if(pokeFragment.terminado==true)
-                    super.onBackPressed();
-            }
-            else
-                if(tipoFragment!=null)
-                {
-                    if(tipoFragment.terminado==true)
-                        super.onBackPressed();
-                }
-                else
-                    if(habilidadFragment!=null)
-                    {
-                        if(habilidadFragment.terminado==true)
-                            super.onBackPressed();
-                    }
-                    else
-                        if(movimientoFragment!=null)
-                        {
-                            if(movimientoFragment.terminado==true)
-                                super.onBackPressed();
-                        }
-                        else
-                            if(pokeFragment==null && tipoFragment==null && habilidadFragment == null && movimientoFragment==null)
-                                super.onBackPressed();
+            if (noHayFragmentCargando())
+                super.onBackPressed();
         }
     }
 
@@ -102,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
+        if(noHayFragmentCargando())
         switch (id)
         {
             case R.id.nav_pokemon:
@@ -223,5 +195,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
+    public boolean noHayFragmentCargando()
+    {
+        boolean puedeEjecutar = false;
 
+        DetallePokemonFragment pokeFragment = (DetallePokemonFragment) getFragmentManager().findFragmentByTag("pokemonFragment");
+        DetalleTipoFragment tipoFragment = (DetalleTipoFragment) getFragmentManager().findFragmentByTag("tipoFragment");
+        DetalleHabilidadFragment habilidadFragment = (DetalleHabilidadFragment) getFragmentManager().findFragmentByTag("habilidadFragment");
+        DetalleMovimientoFragment movimientoFragment = (DetalleMovimientoFragment) getFragmentManager().findFragmentByTag("movimientoFragment");
+        if(pokeFragment!=null)
+        {
+            if(pokeFragment.terminado==true)
+                puedeEjecutar = true;
+        }
+        else
+            if(tipoFragment!=null)
+            {
+                if(tipoFragment.terminado==true)
+                    puedeEjecutar = true;
+            }
+            else
+                if(habilidadFragment!=null)
+                {
+                    if(habilidadFragment.terminado==true)
+                        puedeEjecutar = true;
+                }
+                else
+                    if(movimientoFragment!=null)
+                    {
+                        if(movimientoFragment.terminado==true)
+                            puedeEjecutar = true;
+                    }
+                    else
+                        if(pokeFragment==null && tipoFragment==null && habilidadFragment == null && movimientoFragment==null)
+                            puedeEjecutar = true;
+
+        return puedeEjecutar;
+    }
 }
