@@ -2,6 +2,8 @@ package es.iesnervion.dbenitez.dexdroid.Fragments.Detalles;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.List;
@@ -123,6 +126,12 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
             else
             {
                 Pokemon pokemon = poke.get(0);
+
+                ImageView fotaso = (ImageView) getActivity().findViewById(R.id.imgPokemon);
+
+                Bitmap bmp = BitmapFactory.decodeByteArray(pokemon.getImagen(), 0, pokemon.getImagen().length);
+
+                fotaso.setImageBitmap(Bitmap.createScaledBitmap(bmp, fotaso.getWidth(), fotaso.getHeight(), false));
 
                 TextView pokimon = (TextView) getActivity().findViewById(R.id.pokemon);
                 int numPokedex = pokemon.getNumPokedex();

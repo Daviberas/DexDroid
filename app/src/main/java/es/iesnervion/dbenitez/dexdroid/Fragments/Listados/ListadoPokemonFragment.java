@@ -2,6 +2,8 @@ package es.iesnervion.dbenitez.dexdroid.Fragments.Listados;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
@@ -66,7 +69,7 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
     public void pokemonResponse(List<Pokemon> pokes,boolean evolucion)
     {
         arrayPokemon=new Pokemon[pokes.size()];
-        setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,pokes.toArray(arrayPokemon)));
+        setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row_imagen, R.id.texto,pokes.toArray(arrayPokemon)));
     }
 
     @Override
@@ -120,12 +123,12 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
 
             if (row==null){
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-                row=inflater.inflate(R.layout.row, parent, false);
+                row=inflater.inflate(R.layout.row_imagen, parent, false);
 
                 TextView tv = (TextView) row.findViewById(R.id.texto);
+                ImageView iv = (ImageView) row.findViewById(R.id.imagen);
 
-
-                holder = new ViewHolder (tv);
+                holder = new ViewHolder (tv,iv);
                 row.setTag(holder);
 
                 getListView().setDivider(null);
@@ -137,6 +140,10 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
             }
 
             holder.getTv().setText(arrayPokemon[position].getNombre());
+            Bitmap bmp = BitmapFactory.decodeByteArray(arrayPokemon[position].getImagen(), 0, arrayPokemon[position].getImagen().length);
+
+            holder.getIv().setImageBitmap(Bitmap.createScaledBitmap(bmp, holder.getIv().getWidth(), holder.getIv().getHeight(), false));
+
 
             return (row);
         }
