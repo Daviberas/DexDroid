@@ -131,7 +131,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
 
                 Bitmap bmp = BitmapFactory.decodeByteArray(pokemon.getImagen(), 0, pokemon.getImagen().length);
 
-                fotaso.setImageBitmap(Bitmap.createScaledBitmap(bmp, fotaso.getWidth(), fotaso.getHeight(), false));
+                fotaso.setImageBitmap(bmp);
 
                 TextView pokimon = (TextView) getActivity().findViewById(R.id.pokemon);
                 int numPokedex = pokemon.getNumPokedex();

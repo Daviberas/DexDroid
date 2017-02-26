@@ -142,7 +142,7 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
             holder.getTv().setText(arrayPokemon[position].getNombre());
             Bitmap bmp = BitmapFactory.decodeByteArray(arrayPokemon[position].getImagen(), 0, arrayPokemon[position].getImagen().length);
 
-            holder.getIv().setImageBitmap(Bitmap.createScaledBitmap(bmp, holder.getIv().getWidth(), holder.getIv().getHeight(), false));
+            holder.getIv().setImageBitmap(bmp);
 
 
             return (row);

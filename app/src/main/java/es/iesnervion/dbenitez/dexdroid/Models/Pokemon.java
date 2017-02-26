@@ -2,6 +2,7 @@ package es.iesnervion.dbenitez.dexdroid.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Base64;
 
 public class Pokemon implements Parcelable
 {
@@ -9,9 +10,9 @@ public class Pokemon implements Parcelable
     private String nombre;
     private double porcentajeMacho;
     private double porcentajeHembra;
-    private byte[] imagen;
+    private String imagen;
 
-    public Pokemon(int numPokedex, String nombre, double porcentajeMacho, double porcentajeHembra, byte[] imagen)
+    public Pokemon(int numPokedex, String nombre, double porcentajeMacho, double porcentajeHembra, String imagen)
     {
         this.numPokedex = numPokedex;
         this.nombre = nombre;
@@ -20,12 +21,13 @@ public class Pokemon implements Parcelable
         this.imagen = imagen;
     }
 
-    protected Pokemon(Parcel in) {
+    protected Pokemon(Parcel in)
+    {
         numPokedex = in.readInt();
         nombre = in.readString();
         porcentajeMacho = in.readDouble();
         porcentajeHembra = in.readDouble();
-        in.readByteArray(imagen);
+        imagen = in.readString();
     }
 
     public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
@@ -82,10 +84,12 @@ public class Pokemon implements Parcelable
 
     public byte[] getImagen()
     {
-        return imagen;
+        imagen = imagen.substring(imagen.indexOf(",") + 1);
+        byte[] decodedString = Base64.decode(imagen.getBytes(), Base64.DEFAULT);
+        return decodedString;
     }
 
-    public void setImagen(byte[] imagen)
+    public void setImagen(String imagen)
     {
         this.imagen = imagen;
     }
@@ -101,7 +105,7 @@ public class Pokemon implements Parcelable
         dest.writeString(nombre);
         dest.writeDouble(porcentajeMacho);
         dest.writeDouble(porcentajeHembra);
-        dest.writeByteArray(imagen);
+        dest.writeString(imagen);
     }
 }
 

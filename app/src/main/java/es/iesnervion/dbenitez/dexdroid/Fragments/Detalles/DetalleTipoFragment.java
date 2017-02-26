@@ -2,6 +2,8 @@ package es.iesnervion.dbenitez.dexdroid.Fragments.Detalles;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -182,9 +185,9 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
                 row=inflater.inflate(R.layout.elemento_grid, parent, false);
 
                 TextView tv = (TextView) row.findViewById(R.id.textoGrid);
+                ImageView iv = (ImageView) row.findViewById(R.id.imgGrid);
 
-
-                holder = new ViewHolder (tv);
+                holder = new ViewHolder (tv,iv);
                 row.setTag(holder);
             }
             else
@@ -193,6 +196,10 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
             }
 
             holder.getTv().setText(listaPokes.get(position).getNombre());
+            Bitmap bmp = BitmapFactory.decodeByteArray(listaPokes.get(position).getImagen(), 0, listaPokes.get(position).getImagen().length);
+
+            holder.getIv().setImageBitmap(bmp);
+
 
             return (row);
         }
