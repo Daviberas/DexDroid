@@ -83,12 +83,11 @@ public class ListadoHabilidadesFragment extends ListFragment implements ApiRespo
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void habilidadResponse(List<Habilidad> habilidades, String categoria)
     {
         arrayHabilidades =new Habilidad[habilidades.size()];
-        setListAdapter(new ListadoHabilidadesFragment.AdapterIcono<Habilidad>(this.getContext(), R.layout.row, R.id.texto,habilidades.toArray(arrayHabilidades)));
+        setListAdapter(new ListadoHabilidadesFragment.AdapterIcono<Habilidad>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,habilidades.toArray(arrayHabilidades)));
     }
 
     @Override

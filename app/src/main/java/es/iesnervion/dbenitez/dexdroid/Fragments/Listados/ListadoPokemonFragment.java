@@ -62,14 +62,11 @@ public class ListadoPokemonFragment extends ListFragment implements ApiResponse
         EventBus.getDefault().post(new PokemonClickedEvent(poke));
     }
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void pokemonResponse(List<Pokemon> pokes,boolean evolucion)
     {
         arrayPokemon=new Pokemon[pokes.size()];
-        setListAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row_imagen, R.id.texto,pokes.toArray(arrayPokemon)));
+        setListAdapter(new AdapterIcono<Pokemon>(getActivity().getApplicationContext(), R.layout.row_imagen, R.id.texto,pokes.toArray(arrayPokemon)));
     }
 
     @Override

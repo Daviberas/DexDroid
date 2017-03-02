@@ -96,12 +96,11 @@ public class ListadoMovimientosFragment extends ListFragment implements ApiRespo
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void movimientoResponse(List<Movimiento> movimientos)
     {
         arrayMovimientos =new Movimiento[movimientos.size()];
-        setListAdapter(new ListadoMovimientosFragment.AdapterIcono<Movimiento>(this.getContext(), R.layout.row, R.id.texto,movimientos.toArray(arrayMovimientos)));
+        setListAdapter(new ListadoMovimientosFragment.AdapterIcono<Movimiento>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,movimientos.toArray(arrayMovimientos)));
     }
 
     class AdapterIcono<T> extends ArrayAdapter<T>

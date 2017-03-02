@@ -105,7 +105,6 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
         mCurrentPosition = position;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void pokemonResponse(List<Pokemon> poke, boolean evolucion)
     {
         if (poke != null)
@@ -119,7 +118,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                     tv.setVisibility(View.VISIBLE);
                     ListView lista = (ListView) getActivity().findViewById(R.id.evolucionPokemon);
                     Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
-                    lista.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.row, R.id.texto,listaPokes.toArray(arrayPokemon)));
+                    lista.setAdapter(new AdapterIcono<Pokemon>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,listaPokes.toArray(arrayPokemon)));
                     lista.setVisibility(View.VISIBLE);
                 }
             }
@@ -323,7 +322,6 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void movimientoResponse(List<Movimiento> movimientos)
     {
@@ -338,7 +336,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
                 lista.setVisibility(View.VISIBLE);
                 Movimiento[] arrayMovimientos=new Movimiento[listaMov.size()];
                 listaMov.toArray(arrayMovimientos);
-                lista.setAdapter(new AdapterIcono2<Movimiento>(getContext(), R.layout.row, R.id.texto,arrayMovimientos));
+                lista.setAdapter(new AdapterIcono2<Movimiento>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,arrayMovimientos));
                 terminado = true;
             }
         }

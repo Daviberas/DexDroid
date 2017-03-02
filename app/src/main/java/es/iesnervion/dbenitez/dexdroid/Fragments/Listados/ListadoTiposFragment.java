@@ -71,12 +71,11 @@ public class ListadoTiposFragment extends ListFragment implements ApiResponse
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void tipoResponse(List<Tipo> tipos)
     {
         arrayTipos =new Tipo[tipos.size()];
-        setListAdapter(new ListadoTiposFragment.AdapterIcono<Tipo>(this.getContext(), R.layout.row, R.id.texto,tipos.toArray(arrayTipos)));
+        setListAdapter(new ListadoTiposFragment.AdapterIcono<Tipo>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,tipos.toArray(arrayTipos)));
     }
 
     @Override

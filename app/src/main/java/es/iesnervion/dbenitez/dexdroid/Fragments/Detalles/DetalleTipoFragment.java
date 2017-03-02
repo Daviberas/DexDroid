@@ -89,7 +89,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
 
         mCurrentPosition = position;
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void pokemonResponse(List<Pokemon> poke, boolean evolucion)
     {
@@ -100,7 +100,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
             {
                 GridView grid = (GridView) getActivity().findViewById(R.id.gridPokemonTipo);
                 Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
-                grid.setAdapter(new AdapterIcono<Pokemon>(getContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
+                grid.setAdapter(new AdapterIcono<Pokemon>(getActivity().getApplicationContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
                 terminado = true;
             }
         }
