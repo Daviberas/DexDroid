@@ -16,7 +16,7 @@ public class Movimiento implements Parcelable
     private String contacto;
     private int id_tipo;
 
-    public Movimiento(int id, String nombre, String efecto, int potencia, double porcentajeAcierto, String via, int pp, String objetivo, String contacto, int id_tipo) {
+    public Movimiento(int id, String nombre, int potencia, double porcentajeAcierto, String via, int pp, String objetivo, String efecto, String contacto, int id_tipo) {
         this.id = id;
         this.nombre = nombre;
         this.efecto = efecto;
