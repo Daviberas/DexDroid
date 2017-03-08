@@ -21,7 +21,7 @@
                     android:id="@+id/imgPokemon"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:scaleType="centerInside" />
+                    android:scaleType="fitCenter" />
 
                 <TextView
                     android:id="@+id/pokemon"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/male"
                     android:layout_alignBottom="@id/pokemon"
-                    android:layout_toRightOf="@id/txtTipoPokemon"
+                    android:layout_toRightOf="@id/pokemon"
                     android:layout_below="@id/imgPokemon"
                     android:maxHeight="1dp"/>
 

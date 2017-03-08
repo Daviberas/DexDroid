@@ -44,6 +44,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
     int mCurrentPosition = -1;
     List<Pokemon> listaPokes = new Vector<Pokemon>(0,1);
     int tamanio;
+    int altura;
 
     public boolean terminado = false;
 
@@ -60,6 +61,7 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
             TipoCallback tipoCallback = new TipoCallback(this);
             ti.getTipo(mCurrentPosition).enqueue(tipoCallback);
         }
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
 
         return inflater.inflate(R.layout.detalle_tipo, container, false);
     }
@@ -99,6 +101,15 @@ public class DetalleTipoFragment extends Fragment implements ApiResponse
             if(listaPokes.size()==tamanio)
             {
                 GridView grid = (GridView) getActivity().findViewById(R.id.gridPokemonTipo);
+                if(tamanio>0)
+                {
+                    ViewGroup.LayoutParams params = grid.getLayoutParams();
+
+
+                    params.height = altura * tamanio/3;
+
+                    grid.setLayoutParams(params);
+                }
                 Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
                 grid.setAdapter(new AdapterIcono<Pokemon>(getActivity().getApplicationContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
                 terminado = true;

@@ -45,6 +45,7 @@ public class DetalleHabilidadFragment extends Fragment implements ApiResponse
 
     List<Pokemon> listaPokes = new Vector<Pokemon>(0,1);
     int tamanio;
+    int altura;
 
     public boolean terminado = false;
 
@@ -61,6 +62,7 @@ public class DetalleHabilidadFragment extends Fragment implements ApiResponse
             HabilidadCallback habilidadCallback = new HabilidadCallback(this,"");
             hi.getHabilidad(mCurrentPosition).enqueue(habilidadCallback);
         }
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
 
         return inflater.inflate(R.layout.detalle_habilidad, container, false);
     }
@@ -100,6 +102,17 @@ public class DetalleHabilidadFragment extends Fragment implements ApiResponse
             if(listaPokes.size()==tamanio)
             {
                 GridView grid = (GridView) getActivity().findViewById(R.id.gridPokemonHabilidad);
+                if(tamanio>0)
+                {
+                    ViewGroup.LayoutParams params = grid.getLayoutParams();
+
+                    if(tamanio%3>0)
+                        params.height = altura * ((tamanio/3)+1);
+                    else
+                        params.height = altura * (tamanio/3);
+
+                    grid.setLayoutParams(params);
+                }
                 Pokemon[] arrayPokemon=new Pokemon[listaPokes.size()];
                 grid.setAdapter(new AdapterIcono<Pokemon>(getActivity().getApplicationContext(), R.layout.elemento_grid, R.id.textoGrid,listaPokes.toArray(arrayPokemon)));
                 terminado = true;

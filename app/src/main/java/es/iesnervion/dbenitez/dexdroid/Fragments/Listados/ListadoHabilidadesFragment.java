@@ -36,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ListadoHabilidadesFragment extends ListFragment implements ApiResponse
 {
     Habilidad[] arrayHabilidades;
+    int altura;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -50,6 +51,7 @@ public class ListadoHabilidadesFragment extends ListFragment implements ApiRespo
         HabilidadCallback habilidadCallback = new HabilidadCallback(this,"");
 
         ti.getHabilidad().enqueue(habilidadCallback);
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
 
         return(result);
     }
@@ -87,6 +89,11 @@ public class ListadoHabilidadesFragment extends ListFragment implements ApiRespo
     public void habilidadResponse(List<Habilidad> habilidades, String categoria)
     {
         arrayHabilidades =new Habilidad[habilidades.size()];
+        ViewGroup.LayoutParams params = getListView().getLayoutParams();
+
+        params.height = altura*habilidades.size();
+
+        getListView().setLayoutParams(params);
         setListAdapter(new ListadoHabilidadesFragment.AdapterIcono<Habilidad>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,habilidades.toArray(arrayHabilidades)));
     }
 

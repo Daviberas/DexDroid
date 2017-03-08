@@ -36,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ListadoMovimientosFragment extends ListFragment implements ApiResponse
 {
     Movimiento[] arrayMovimientos;
+    int altura;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -49,6 +50,7 @@ public class ListadoMovimientosFragment extends ListFragment implements ApiRespo
 
         MovimientoCallback movimientoCallback = new MovimientoCallback(this);
         ti.getMovimiento().enqueue(movimientoCallback);
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
 
         return(result);
     }
@@ -100,6 +102,11 @@ public class ListadoMovimientosFragment extends ListFragment implements ApiRespo
     public void movimientoResponse(List<Movimiento> movimientos)
     {
         arrayMovimientos =new Movimiento[movimientos.size()];
+        ViewGroup.LayoutParams params = getListView().getLayoutParams();
+
+        params.height = altura*movimientos.size();
+
+        getListView().setLayoutParams(params);
         setListAdapter(new ListadoMovimientosFragment.AdapterIcono<Movimiento>(getActivity().getApplicationContext(), R.layout.row, R.id.texto,movimientos.toArray(arrayMovimientos)));
     }
 

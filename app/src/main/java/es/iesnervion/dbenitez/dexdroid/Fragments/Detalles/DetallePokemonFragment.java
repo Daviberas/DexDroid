@@ -74,7 +74,7 @@ public class DetallePokemonFragment extends Fragment implements ApiResponse
             PokemonCallback pokemonCallback = new PokemonCallback(this,false);
             pi.getPokemon(mCurrentPosition).enqueue(pokemonCallback);
         }
-        altura = getResources().getDimensionPixelSize(R.dimen.row_height);
+        altura = getResources().getDimensionPixelSize(R.dimen.row_height2);
 
         return inflater.inflate(R.layout.detalle_pokemon, container, false);
     }
