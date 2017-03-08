@@ -1,8 +1,5 @@
 package es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleHabilidadFragment;
@@ -64,7 +61,6 @@ public class PokemonCallback implements Callback<List<Pokemon>>
         this.pokes = pokes;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response)
     {

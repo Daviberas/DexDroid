@@ -1,8 +1,5 @@
 package es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetallePokemonFragment;
@@ -31,7 +28,6 @@ public class EvolucionCallback implements Callback<List<Evolucion>>
         this.evoluciones = evoluciones;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onResponse(Call<List<Evolucion>> call, Response<List<Evolucion>> response)
     {

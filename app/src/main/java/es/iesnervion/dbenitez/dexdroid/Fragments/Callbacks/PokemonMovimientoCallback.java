@@ -1,8 +1,5 @@
 package es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.util.List;
 
 import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleMovimientoFragment;
@@ -29,7 +26,6 @@ public class PokemonMovimientoCallback implements Callback<List<MovimientosPokem
         this.pokesMovimiento = pokesMovimiento;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onResponse(Call<List<MovimientosPokemon>> call, Response<List<MovimientosPokemon>> response)
     {
