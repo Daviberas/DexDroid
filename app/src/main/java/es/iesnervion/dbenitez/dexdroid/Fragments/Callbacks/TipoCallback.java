@@ -2,6 +2,7 @@ package es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks;
 
 import java.util.List;
 
+import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleMovimientoFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetallePokemonFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Detalles.DetalleTipoFragment;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Listados.ListadoTiposFragment;
@@ -14,12 +15,18 @@ public class TipoCallback implements Callback<List<Tipo>>
 {
     List<Tipo> tipos;
     DetallePokemonFragment detallePokemon;
+    DetalleMovimientoFragment detalleMovimiento;
     DetalleTipoFragment detalleTipo;
     ListadoTiposFragment listadoTipos;
 
     public TipoCallback(DetallePokemonFragment detallePokemonFragment)
     {
         this.detallePokemon = detallePokemonFragment;
+    }
+
+    public TipoCallback(DetalleMovimientoFragment detalleMovimiento)
+    {
+        this.detalleMovimiento = detalleMovimiento;
     }
 
     public TipoCallback(DetalleTipoFragment detalleTipo)
@@ -55,6 +62,9 @@ public class TipoCallback implements Callback<List<Tipo>>
             else
                 if(detalleTipo!=null)
                     detalleTipo.tipoResponse(tipos);
+                else
+                    if(detalleMovimiento!=null)
+                        detalleMovimiento.tipoResponse(tipos);
 
     }
 

@@ -21,6 +21,8 @@ import java.util.Vector;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks.MovimientoCallback;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks.PokemonCallback;
 import es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks.PokemonMovimientoCallback;
+import es.iesnervion.dbenitez.dexdroid.Fragments.Callbacks.TipoCallback;
+import es.iesnervion.dbenitez.dexdroid.Interfaces.TipoInterface;
 import es.iesnervion.dbenitez.dexdroid.ViewHolder;
 import es.iesnervion.dbenitez.dexdroid.Interfaces.ApiResponse;
 import es.iesnervion.dbenitez.dexdroid.Models.Evolucion;
@@ -127,7 +129,14 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
     @Override
     public void tipoResponse(List<Tipo> tipos)
     {
+        if (tipos != null)
+        {
+            Tipo tipo = tipos.get(0);
 
+            TextView txtTipo = (TextView) getActivity().findViewById(R.id.txtTipoMovimiento);
+
+            txtTipo.setText(tipo.getNombre());
+        }
     }
 
     @Override
@@ -214,6 +223,11 @@ public class DetalleMovimientoFragment extends Fragment implements ApiResponse
 
             PokemonMovimientoCallback pokemonMovimientoCallback = new PokemonMovimientoCallback(this);
             mpi.getPokemonMovimiento(mov.getId()).enqueue(pokemonMovimientoCallback);
+
+            TipoInterface ti = retrofit.create(TipoInterface.class);
+
+            TipoCallback tipoCallback = new TipoCallback(this);
+            ti.getTipo(mov.getId_tipo()).enqueue(tipoCallback);
         }
     }
 
